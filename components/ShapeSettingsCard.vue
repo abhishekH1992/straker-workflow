@@ -12,7 +12,7 @@
                 />
             </div>
             <div class="shape-list-block-item">
-                <v-icon>mdi-close</v-icon>
+                <v-icon class="coursor-pointer" @click="emitDelete">mdi-close</v-icon>
             </div>
         </v-card-text>
     </v-card>

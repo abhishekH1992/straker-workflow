@@ -4,7 +4,6 @@ export function useShapes() {
     const shapes = ref([]);
 
     const addShape = (shape) => {
-        console.log(shape);
         if(shape.icon !== 'mdiTextRecognition') {
             shapes.value.push({
                 ...shape,
@@ -38,7 +37,6 @@ export function useShapes() {
     const deleteShape = (index) => {
         if (shapes.value[index]) {
             shapes.value.splice(index, 1);
-            saveShapesToLocalStorage();
         }
     };
 
