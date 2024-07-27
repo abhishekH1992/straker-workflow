@@ -1,6 +1,10 @@
 <template>
     <v-app class="main">
-        <HeaderNav />
+        <HeaderNav
+            @save="saveShapes"
+            :hasShapesInLocalStorage="hasShapesInLocalStorage"
+            @load="loadShapes"
+        />
         <v-container class="relative">
             <div
                 v-for="(shape, index) in shapes"
@@ -27,7 +31,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted, onUnmounted, nextTick } from 'vue';
 import { useShapes } from '~/composables/useShapes';
 import HeaderNav from '~/components/HeaderNav.vue';
 import FloatingActionButton from '~/components/FloatingActionButton.vue';
@@ -36,8 +40,9 @@ import ShapeIcon from '~/components/ShapeIcon.vue';
 import ShapeSettingsCard from '~/components/ShapeSettingsCard.vue';
 
 const isOpen = ref(false);
-const { shapes, addShape, updateShape, deleteShape } = useShapes();
+const { shapes, addShape, updateShape, deleteShape, saveShapesToLocalStorage, loadShapesFromLocalStorage } = useShapes();
 const currentShapeIndex = ref(null);
+const hasShapesInLocalStorage = ref(false);
 
 const toggleOptions = (open) => {
     isOpen.value = open;
@@ -48,6 +53,7 @@ const showSettings = (index, event) => {
 };
 
 const updateShapeHandler = (index, updatedShape) => {
+    const shape = shapes.value[index];
     const size = Math.max(updatedShape.width, updatedShape.height);
     updateShape(index, { ...updatedShape, size });
 };
@@ -88,7 +94,6 @@ const startDrag = (event, index) => {
 const handleClickOutside = (event) => {
     const shapeContainers = document.querySelectorAll('.shape-container');
     const shapeCards = document.querySelectorAll('.shape-list-block');
-
     const isClickInsideShape = Array.from(shapeContainers).some(container => container.contains(event.target));
     const isClickInsideCard = Array.from(shapeCards).some(card => card.contains(event.target));
 
@@ -97,7 +102,33 @@ const handleClickOutside = (event) => {
     }
 };
 
+const saveShapes = () => {
+    saveShapesToLocalStorage();
+    checkLocalStorage();
+};
+
+const loadShapes = () => {
+    loadShapesFromLocalStorage();
+    checkLocalStorage();
+};
+
+const checkLocalStorage = () => {
+    if (process.client) {
+        const savedShapes = localStorage.getItem('shapes');
+        hasShapesInLocalStorage.value = savedShapes !== null;
+    }
+};
+
 onMounted(() => {
+    nextTick(() => {
+        checkLocalStorage();
+        if (process.client) {
+            const savedShapes = localStorage.getItem('shapes');
+            if (savedShapes) {
+                shapes.value = JSON.parse(savedShapes);
+            }
+        }
+    });
     document.addEventListener('click', handleClickOutside);
 });
 
@@ -112,5 +143,8 @@ onUnmounted(() => {
     }
     .shape-container {
         @apply p-2 absolute;
+    }
+    .v-card-text {
+        @apply flex p-0;
     }
 </style>

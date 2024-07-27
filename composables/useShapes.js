@@ -16,17 +16,36 @@ export function useShapes() {
     };
 
     const updateShape = (index, newAttributes) => {
-        Object.assign(shapes.value[index], newAttributes);
+        if (shapes.value[index]) {
+            Object.assign(shapes.value[index], newAttributes);
+        }
     };
 
     const deleteShape = (index) => {
-        shapes.value.splice(index, 1);
+        if (shapes.value[index]) {
+            shapes.value.splice(index, 1);
+        }
     };
 
     const toggleSettings = (index) => {
         shapes.value.forEach((shape, i) => {
-        shape.showSettings = i === index ? !shape.showSettings : false;
+            shape.showSettings = i === index ? !shape.showSettings : false;
         });
+    };
+
+    const saveShapesToLocalStorage = () => {
+        if (process.client && shapes.value.length) {
+            localStorage.setItem('shapes', JSON.stringify(shapes.value));
+        }
+    };
+
+    const loadShapesFromLocalStorage = () => {
+        if (process.client) {
+            const savedShapes = localStorage.getItem('shapes');
+            if (savedShapes) {
+                shapes.value = JSON.parse(savedShapes);
+            }
+        }
     };
 
     return {
@@ -35,5 +54,7 @@ export function useShapes() {
         updateShape,
         deleteShape,
         toggleSettings,
+        saveShapesToLocalStorage,
+        loadShapesFromLocalStorage
     };
 }
