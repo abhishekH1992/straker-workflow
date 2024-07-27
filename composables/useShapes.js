@@ -4,15 +4,29 @@ export function useShapes() {
     const shapes = ref([]);
 
     const addShape = (shape) => {
-        shapes.value.push({
-            ...shape,
-            showSettings: false,
-            top: 100,
-            left: 100,
-            width: 150,
-            height: 150,
-            size: 150,
-        });
+        console.log(shape);
+        if(shape.icon !== 'mdiTextRecognition') {
+            shapes.value.push({
+                ...shape,
+                showSettings: false,
+                isEditing: false,
+                text: '',
+                top: 100,
+                left: 100,
+                width: 150,
+                height: 150,
+                size: 150,
+            });
+        } else {
+            shapes.value.push({
+                ...shape,
+                showSettings: false,
+                isEditing: false,
+                text: 'Write here...',
+                top: 100,
+                left: 100,
+            });
+        }
     };
 
     const updateShape = (index, newAttributes) => {

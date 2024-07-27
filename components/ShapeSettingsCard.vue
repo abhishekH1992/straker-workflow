@@ -2,7 +2,7 @@
 <template>
     <v-card class="shape-list-block" @click.stop>
         <v-card-text>
-            <div class="shape-list-block-item">
+            <div class="shape-list-block-item" v-if="shape.icon !== 'mdiTextRecognition'">
                 <v-text-field
                     v-model="localShape.width"
                     label="Width"
@@ -10,7 +10,7 @@
                     @change="emitUpdate"
                 />
             </div>
-            <div class="shape-list-block-item">
+            <div class="shape-list-block-item" v-if="shape.icon !== 'mdiTextRecognition'">
                 <v-text-field
                     v-model="localShape.height"
                     label="Height"

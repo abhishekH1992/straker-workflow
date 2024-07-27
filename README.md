@@ -1,75 +1,27 @@
-# Nuxt 3 Minimal Starter
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+# Straker Workflow
 
-## Setup
+## Table of Content
+- [Overview](#overview)
+- [Technology](#technology)
+- [Project Setup](#project-setup)
 
-Make sure to install the dependencies:
+## Overview
+Create a Single-Page Application (SPA) using Nuxt, Vue, and Vuetify that allows users to drag and drop pre-defined components onto a canvas and connect them to build a workflow or graph.
 
-```bash
-# npm
-npm install
+## Technology
+```Nuxt, Vue, Vuetify, Tailwind```
 
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
+## Project Setup
+### Clone Git Repository
 ```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
+git clone https://github.com/abhishekH1992/straker-workflow.git
+```
+### Install NPM Dependency
+```
+npm i
+```
+### Run project
+```
 npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.

@@ -15,9 +15,21 @@
                 @touchstart="startDrag($event, index)"
                 @click="showSettings(index, $event)"
             >
-                <ShapeIcon :icon="shape.icon" :size="shape.size" />
+                <template v-if="shape.icon === 'mdiTextRecognition'">
+                    <textarea
+                        v-if="shape.isEditing"
+                        v-model="shape.text"
+                        @blur="finishEditing(shape)"
+                        class="b-1 border-theme-brand"
+                        :style="{ width: shape.width + 'px', height: shape.height + 'px' }"
+                    >Type Here...</textarea>
+                    <div v-else @click="editText(shape)">
+                        {{ shape.text || 'Type Here...' }}
+                    </div>
+                </template>
+                <ShapeIcon v-else :icon="shape.icon" :size="shape.size" />
                 <ShapeSettingsCard
-                    v-if="shape.showSettings"
+                    v-if="shape.showSettings && shape.icon !== 'mdiTextRecognition'"
                     :shape="shape"
                     :index="index"
                     @updateShape="updateShapeHandler"
@@ -119,6 +131,14 @@ const checkLocalStorage = () => {
     }
 };
 
+const editText = (shape) => {
+    shape.isEditing = true;
+};
+
+const finishEditing = (shape) => {
+    shape.isEditing = false;
+};
+
 onMounted(() => {
     nextTick(() => {
         checkLocalStorage();
@@ -138,13 +158,13 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-    .main {
-        @apply bg-gray-200;
-    }
-    .shape-container {
-        @apply p-2 absolute;
-    }
-    .v-card-text {
-        @apply flex p-0;
-    }
+.main {
+    @apply bg-gray-200;
+}
+.shape-container {
+    @apply p-2 absolute;
+}
+.v-card-text {
+    @apply flex p-0;
+}
 </style>
