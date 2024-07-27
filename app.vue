@@ -1,5 +1,10 @@
 <template>
     <v-app class="main">
+        <HeaderNav
+            @save="saveShapes"
+            :hasShapesInLocalStorage="hasShapesInLocalStorage"
+            @load="loadShapes"
+        />
         <v-container class="relative">
             <div
                 v-for="(shape, index) in shapes"
@@ -67,7 +72,6 @@ const updateShapeHandler = (index, updatedShape) => {
 };
 
 const deleteShapeHandler = (index) => {
-    console.log(index);
     deleteShape(index);
 };
 

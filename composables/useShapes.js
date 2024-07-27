@@ -37,6 +37,7 @@ export function useShapes() {
     const deleteShape = (index) => {
         if (shapes.value[index]) {
             shapes.value.splice(index, 1);
+            saveShapesToLocalStorage();
         }
     };
 
@@ -47,7 +48,7 @@ export function useShapes() {
     };
 
     const saveShapesToLocalStorage = () => {
-        if (process.client && shapes.value.length) {
+        if (process.client) {
             localStorage.setItem('shapes', JSON.stringify(shapes.value));
         }
     };
