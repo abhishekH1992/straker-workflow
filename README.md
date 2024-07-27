@@ -5,6 +5,7 @@
 - [Overview](#overview)
 - [Technology](#technology)
 - [Project Setup](#project-setup)
+- [Future Scope](#future-scope)
 
 ## Overview
 Create a Single-Page Application (SPA) using Nuxt, Vue, and Vuetify that allows users to drag and drop pre-defined components onto a canvas and connect them to build a workflow or graph.
@@ -25,3 +26,10 @@ npm i
 ```
 npm run dev
 ```
+
+## Future Scope
+- Design Shapes & Lines with CSS
+- Resize tool - write a logic to resize these shapes (there are third party packages for resize like `vue-draggable-resizable` but custom logic for resize will be more effective)
+- Add authentication
+- Store values in DB instead of localStorage
+- Write a non-blocking/async API logic to store values in DB
