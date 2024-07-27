@@ -19,7 +19,7 @@
                     <textarea
                         v-if="shape.isEditing"
                         v-model="shape.text"
-                        @blur="finishEditing(shape)"
+                        @blur="finishEditingDelayed(shape)"
                         class="b-1 border-theme-brand"
                         :style="{ width: shape.width + 'px', height: shape.height + 'px' }"
                     >Type Here...</textarea>
@@ -29,7 +29,7 @@
                 </template>
                 <ShapeIcon v-else :icon="shape.icon" :size="shape.size" />
                 <ShapeSettingsCard
-                    v-if="shape.showSettings && shape.icon !== 'mdiTextRecognition'"
+                    v-if="shape.showSettings"
                     :shape="shape"
                     :index="index"
                     @updateShape="updateShapeHandler"
@@ -66,7 +66,7 @@ const showSettings = (index, event) => {
 
 const updateShapeHandler = (index, updatedShape) => {
     const shape = shapes.value[index];
-    const size = Math.max(updatedShape.width, updatedShape.height);
+    const size = updatedShape.width;
     updateShape(index, { ...updatedShape, size });
 };
 
@@ -137,6 +137,10 @@ const editText = (shape) => {
 
 const finishEditing = (shape) => {
     shape.isEditing = false;
+};
+
+const finishEditingDelayed = (shape) => {
+    setTimeout(() => finishEditing(shape), 500);
 };
 
 onMounted(() => {

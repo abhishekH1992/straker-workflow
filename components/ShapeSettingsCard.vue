@@ -10,14 +10,6 @@
                     @change="emitUpdate"
                 />
             </div>
-            <div class="shape-list-block-item" v-if="shape.icon !== 'mdiTextRecognition'">
-                <v-text-field
-                    v-model="localShape.height"
-                    label="Height"
-                    type="number"
-                    @change="emitUpdate"
-                />
-            </div>
             <div class="shape-list-block-item">
                 <v-btn icon @click="emitDelete">
                     <v-icon>mdi-close</v-icon>
