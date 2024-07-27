@@ -10,7 +10,7 @@
 </template>
   
 <script setup>
-import { ref, defineEmits, onMounted, onBeforeUnmount } from 'vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
   
 const emit = defineEmits(['toggle']);
 const isOpen = ref(false);

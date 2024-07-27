@@ -4,7 +4,8 @@ export default defineNuxtConfig({
     devtools: { enabled: true },
     modules: [
         'vuetify-nuxt-module',
-        '@nuxtjs/tailwindcss'
+        '@nuxtjs/tailwindcss',
+        'nuxt-mdi'
     ],
     css: [
         'vuetify/lib/styles/main.sass',
@@ -17,5 +18,9 @@ export default defineNuxtConfig({
         },
         vuetifyOptions: {
         }
+    },
+    mdi: {
+        componentName: 'MdiIcon',
+        defaultSize: '1em'
     }
 })

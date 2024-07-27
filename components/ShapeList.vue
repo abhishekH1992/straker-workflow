@@ -32,7 +32,6 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits } from 'vue';
 import ShapeIcon from './ShapeIcon.vue';
 
 const props = defineProps({
@@ -42,26 +41,26 @@ const props = defineProps({
 const emit = defineEmits(['shapeSelected']);
 
 const shapes = [
-    { name: 'Rectangle', icon: 'rectangle-outline', size: 30 },
-    { name: 'Square', icon: 'square-outline', size: 30 },
-    { name: 'Rounded Square', icon: 'square-rounded-outline', size: 30 },
-    { name: 'Circle', icon: 'circle-outline', size: 30 },
-    { name: 'Triangle', icon: 'triangle-outline', size: 30 },
-    { name: 'Rhombus', icon: 'rhombus-outline', size: 30 },
-    { name: 'Cube', icon: 'cube-outline', size: 30 },
-    { name: 'Hexagon', icon: 'hexagon-outline', size: 30 },
-    { name: 'Octagon', icon: 'octagon-outline', size: 30 },
-    { name: 'Pentagon', icon: 'pentagon-outline', size: 30 },
+    { name: 'Rectangle', icon: 'mdiRectangleOutline', size: 30 },
+    { name: 'Square', icon: 'mdiSquareOutline', size: 30 },
+    { name: 'Rounded Square', icon: 'mdiSquareRoundedOutline', size: 30 },
+    { name: 'Circle', icon: 'mdiCircleOutline', size: 30 },
+    { name: 'Triangle', icon: 'mdiTriangleOutline', size: 30 },
+    { name: 'Rhombus', icon: 'mdiRhombusOutline', size: 30 },
+    { name: 'Cube', icon: 'mdiCubeOutline', size: 30 },
+    { name: 'Hexagon', icon: 'mdiHexagonOutline', size: 30 },
+    { name: 'Octagon', icon: 'mdiOctagonOutline', size: 30 },
+    { name: 'Pentagon', icon: 'mdiPentagonOutline', size: 30 },
 ];
 
 const lines = [
-    { name: 'Line', icon: 'minus', size: 30 },
-    { name: 'Vector Line', icon: 'vector-line', size: 30 },
-    { name: 'Arrow Up', icon: 'arrow-up', size: 30 },
-    { name: 'Arrow Right', icon: 'arrow-right', size: 30 },
-    { name: 'Arrow Bottpm', icon: 'arrow-down', size: 30 },
-    { name: 'Arrow Left', icon: 'arrow-left', size: 30 },
-    { name: 'Two Directional Arrow', icon: 'arrow-left-right-bold-outline', size: 30 },
+    { name: 'Line', icon: 'mdiMinus', size: 30 },
+    { name: 'Vector Line', icon: 'mdiVectorLine', size: 30 },
+    { name: 'Arrow Up', icon: 'mdiArrowUp', size: 30 },
+    { name: 'Arrow Right', icon: 'mdiArrowRight', size: 30 },
+    { name: 'Arrow Bottpm', icon: 'mdiArrowDown', size: 30 },
+    { name: 'Arrow Left', icon: 'mdiArrowLeft', size: 30 },
+    { name: 'Two Directional Arrow', icon: 'mdiArrowLeftRightBoldOutline', size: 30 },
 ];
 
 const selectShape = (item) => {
