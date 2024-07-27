@@ -3,17 +3,16 @@
     <v-card class="shape-list-block" @click.stop>
         <v-card-text>
             <div class="shape-list-block-item" v-if="shape.icon !== 'mdiTextRecognition'">
-                <v-text-field
+                <input
                     v-model="localShape.width"
                     label="Width"
                     type="number"
                     @change="emitUpdate"
+                    class="w-12 focus:outline-none"
                 />
             </div>
             <div class="shape-list-block-item">
-                <v-btn icon @click="emitDelete">
-                    <v-icon>mdi-close</v-icon>
-                </v-btn>
+                <v-icon>mdi-close</v-icon>
             </div>
         </v-card-text>
     </v-card>

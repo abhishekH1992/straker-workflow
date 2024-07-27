@@ -2,7 +2,7 @@
     <div v-if="isOpen" class="shape-list" elevation="4">
         <div class="text-gray-500 p-4 pb-2 text-sm">Shapes</div>
         <v-divider :thickness="2"></v-divider>
-        <div class="grid grid-cols-5 sm:grid-cols-4 gap-4 p-4">
+        <div class="grid grid-cols-5 xl:grid-cols-4 gap-4 p-4">
             <div v-for="(shape, index) in shapes" :key="index" class="shape-list-item">
                 <v-tooltip bottom :text="shape.name">
                     <template v-slot:activator="{ on, attrs }">
@@ -16,7 +16,7 @@
         </div>
         <div class="text-gray-500 p-4 pb-2 text-sm">Line</div>
         <v-divider :thickness="2"></v-divider>
-        <div class="grid grid-cols-5 sm:grid-cols-4 gap-4 p-4">
+        <div class="grid grid-cols-5 xl:grid-cols-4 gap-4 p-4">
             <div v-for="(line, index) in lines" :key="index" class="shape-list-item">
                 <v-tooltip bottom :text="line.name">
                     <template v-slot:activator="{ on, attrs }">
@@ -30,7 +30,7 @@
         </div>
         <div class="text-gray-500 p-4 pb-2 text-sm">Typography</div>
         <v-divider :thickness="2"></v-divider>
-        <div class="grid grid-cols-5 sm:grid-cols-4 gap-4 p-4">
+        <div class="grid grid-cols-5 xl:grid-cols-4 gap-4 p-4">
             <div v-for="(typo, index) in typography" :key="index" class="shape-list-item">
                 <v-tooltip bottom :text="typo.name">
                     <template v-slot:activator="{ on, attrs }">

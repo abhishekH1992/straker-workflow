@@ -65,9 +65,10 @@ const showSettings = (index, event) => {
 };
 
 const updateShapeHandler = (index, updatedShape) => {
-    const shape = shapes.value[index];
-    const size = updatedShape.width;
-    updateShape(index, { ...updatedShape, size });
+    if(updatedShape.width > 0) {
+        const size = updatedShape.width;
+        updateShape(index, { ...updatedShape, size });
+    }
 };
 
 const deleteShapeHandler = (index) => {

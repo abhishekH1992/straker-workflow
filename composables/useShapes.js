@@ -38,6 +38,7 @@ export function useShapes() {
     const deleteShape = (index) => {
         if (shapes.value[index]) {
             shapes.value.splice(index, 1);
+            saveShapesToLocalStorage();
         }
     };
 
