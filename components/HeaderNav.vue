@@ -1,5 +1,5 @@
 <template>
-    <v-app-bar app>
+    <v-app-bar class="header" app>
         <v-app-bar-title>Straker WorkFlow</v-app-bar-title>
         <v-spacer></v-spacer>
         <v-btn class="mr-4" @click="$emit('save')">Save</v-btn>
@@ -13,4 +13,4 @@ import { defineProps } from 'vue';
 const props = defineProps({
     hasShapesInLocalStorage: Boolean
 });
-</script>  
+</script>

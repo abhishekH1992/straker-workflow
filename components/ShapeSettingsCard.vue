@@ -1,15 +1,6 @@
 <template>
     <v-card class="shape-list-block" @click.stop>
         <v-card-text>
-            <div class="shape-list-block-item" v-if="shape.icon !== 'mdiTextRecognition'">
-                <input
-                    v-model="localShape.width"
-                    label="Width"
-                    type="number"
-                    @change="emitUpdate"
-                    class="w-12 focus:outline-none"
-                />
-            </div>
             <div class="shape-list-block-item">
                 <v-icon class="coursor-pointer" @click="emitDelete">mdi-close</v-icon>
             </div>
@@ -25,13 +16,9 @@ const props = defineProps({
     index: Number
 });
 
-const emit = defineEmits(['updateShape', 'deleteShape']);
+const emit = defineEmits(['deleteShape']);
 
 const localShape = computed(() => ({ ...props.shape }));
-
-const emitUpdate = () => {
-    emit('updateShape', props.index, localShape.value);
-};
 
 const emitDelete = () => {
     emit('deleteShape', props.index);

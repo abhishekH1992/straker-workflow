@@ -1,5 +1,6 @@
 <template>
     <v-container class="relative" @mousemove="handleMouseMove">
+        <div class="text-center text-gray-400 text-md mt-14">Double-click on a shape to start drawing a line, then double-click on another shape to connect them.</div>
         <svg class="connection-lines" :width="containerWidth" :height="containerHeight">
             <line
                 v-for="(connection, index) in connections"
@@ -61,7 +62,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, defineProps, defineEmits, watch } from 'vue';
+import { watch } from 'vue';
 import ShapeSettingsCard from './ShapeSettingsCard.vue';
 import Rectangle from './shapes/Rectangle.vue';
 import Circle from './shapes/Circle.vue';
@@ -195,10 +196,6 @@ const getConnectionPoint = (shapeId) => {
     }
     return { x: 0, y: 0 };
 };
-
-watch(() => props.shapes, (newShapes) => {
-  console.log('Shapes in ShapeCanvas updated:', newShapes);
-}, { deep: true });
 </script>
 
 <style scoped>
