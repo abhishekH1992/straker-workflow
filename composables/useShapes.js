@@ -42,7 +42,6 @@ export function useShapes() {
         if (shapes.value[index]) {
             const shapeId = shapes.value[index].id;
             shapes.value.splice(index, 1);
-            // Remove all connections associated with this shape
             connections.value = connections.value.filter(conn => conn.fromId !== shapeId && conn.toId !== shapeId);
         }
     };
