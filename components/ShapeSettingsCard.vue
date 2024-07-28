@@ -1,4 +1,3 @@
-<!-- components/ShapeSettingsCard.vue -->
 <template>
     <v-card class="shape-list-block" @click.stop>
         <v-card-text>

@@ -12,7 +12,7 @@
             :containerWidth="containerWidth"
             :containerHeight="containerHeight"
             @updateShape="updateShape"
-            @deleteShape="deleteShape"
+            @deleteShape="handleDeleteShape"
             @startConnection="startConnection"
             @updateTempConnection="updateTempConnection"
             @finishConnection="finishConnection"
@@ -55,7 +55,6 @@ const saveShapes = () => {
 const loadShapes = () => {
     loadFromLocalStorage();
     checkLocalStorage();
-    // Force a re-render by creating a new array
     shapes.value = [...shapes.value];
     console.log('Shapes after loading:', shapes.value);
 };
@@ -65,6 +64,11 @@ const checkLocalStorage = () => {
         const savedShapes = localStorage.getItem('shapes');
         hasShapesInLocalStorage.value = savedShapes !== null;
     }
+};
+
+const handleDeleteShape = (index) => {
+    deleteShape(index);
+    saveToLocalStorage();
 };
 
 onMounted(() => {

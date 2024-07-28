@@ -36,10 +36,12 @@
                     v-if="shape.isEditing"
                     v-model="shape.text"
                     @blur="finishEditingDelayed(shape)"
-                    class="b-1 border-theme-brand"
+                    class="text-area-input"
                     :style="{ width: shape.width + 'px', height: shape.height + 'px' }"
-                >Type Here...</textarea>
-                <div v-else @click="editText(shape)">{{ shape.text || 'Type Here...' }}</div>
+                    @mousedown.stop
+                    @touchstart.stop
+                >{{ shape.text || 'Type Here...' }}</textarea>
+                <div v-else @click.stop="editText(shape)">{{ shape.text || 'Type Here...' }}</div>
             </template>
             <component
                 v-else
@@ -93,8 +95,8 @@ const getShapeComponent = (shape) => {
         case 'Rhombus': return Rhombus;
         case 'Parallelogram': return Parallelogram;
         case 'Process': return Process;
-        case 'RoundedRectangle': return RoundedRectangle;
-        default: return Rectangle; // Default to Rectangle if unknown
+        case 'Rounded Rectangle': return RoundedRectangle;
+        default: return Rectangle;
     }
 };
 
@@ -159,6 +161,11 @@ const handleDoubleClick = (event, shape) => {
     event.preventDefault();
     event.stopPropagation();
 
+    if (shape.icon === 'mdiTextRecognition') {
+        editText(shape);
+        return;
+    }
+
     const x = shape.left + shape.width / 2;
     const y = shape.top + shape.height / 2;
 
@@ -189,7 +196,6 @@ const getConnectionPoint = (shapeId) => {
     return { x: 0, y: 0 };
 };
 
-// Add this watch effect to log when shapes change
 watch(() => props.shapes, (newShapes) => {
   console.log('Shapes in ShapeCanvas updated:', newShapes);
 }, { deep: true });
@@ -205,5 +211,11 @@ watch(() => props.shapes, (newShapes) => {
     left: 0;
     pointer-events: none;
     z-index: 1;
+}
+.text-area-input {
+    border: 1px solid #000;
+    padding: 5px;
+    resize: none;
+    overflow: auto;
 }
 </style>

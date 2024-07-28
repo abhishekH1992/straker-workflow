@@ -27,7 +27,13 @@ export function useShapes() {
     };
 
     const deleteShape = (index) => {
+        const deletedShapeId = shapes.value[index].id;
         shapes.value.splice(index, 1);
+        
+        // Remove connections associated with the deleted shape
+        connections.value = connections.value.filter(
+            connection => connection.fromId !== deletedShapeId && connection.toId !== deletedShapeId
+        );
     };
 
     const startConnection = (x, y, fromId) => {
@@ -80,12 +86,13 @@ export function useShapes() {
             }
         }
     };
+
     const getComponentForShape = (shape) => {
         console.log('Getting component for shape:', shape);
         if (shape.component) {
             return shape.component;
         }
-        switch(shape.name) {
+        switch(shape.component) {
             case 'Rectangle':
                 return 'Rectangle';
             case 'Circle':
