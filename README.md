@@ -29,7 +29,7 @@ npm run dev
 
 ## Future Scope
 - Design Shapes & Lines with CSS
-- Resize tool - write a logic to resize these shapes (there are third party packages for resize like `vue-draggable-resizable` but custom logic for resize will be more effective)
+- Resize tool - write a more effective logic to resize these shapes (there are third party packages for resize like `vue-draggable-resizable` but custom logic for resize will be more effective)
 - Add authentication
 - Store values in DB instead of localStorage
 - Write a non-blocking/async API logic to store values in DB

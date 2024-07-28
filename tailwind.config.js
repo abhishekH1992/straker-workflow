@@ -17,7 +17,7 @@ module.exports = {
                 theme: {
                     bgColor: '#f2f2f2',
                     brand: '#6200ea',
-                    transparentBg: '#6200ea80'
+                    transparentBg: 'rgba(98, 0, 234, 0.5)'
                 }
             }
         },

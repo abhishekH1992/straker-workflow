@@ -21,7 +21,7 @@ const toggleOptions = () => {
 }
 const handleClickOutside = (event) => {
     const button = document.querySelector('.floating-action-button');
-    const list = document.querySelector('.options-list');
+    const list = document.querySelector('.shape-list');
     if (button && !button.contains(event.target) && list && !list.contains(event.target)) {
         isOpen.value = false;
         emit('toggle', isOpen.value);

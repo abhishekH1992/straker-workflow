@@ -21,6 +21,7 @@ export default defineNuxtConfig({
     },
     mdi: {
         componentName: 'MdiIcon',
-        defaultSize: '1em'
+        defaultSize: '1em',
+        cache: true,
     }
 })
