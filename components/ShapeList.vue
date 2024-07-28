@@ -7,24 +7,10 @@
                 <v-tooltip>
                     <template v-slot:activator="{ props }">
                         <div v-bind="props" class="shape-btn" @click="selectShape(shape)">
-                            <ShapeIcon :size="shape.size" :icon="shape.icon" />
+                            <component :is="shape.component" :width="shape.size" :height="shape.size" />
                         </div>
                     </template>
                     <span>{{ shape.name }}</span>
-                </v-tooltip>
-            </div>
-        </div>
-        <div class="text-gray-500 p-4 pb-2 text-sm">Line</div>
-        <v-divider :thickness="2"></v-divider>
-        <div class="grid grid-cols-6 xl:grid-cols-4 gap-2 xl:gap-4 px-4 py-2 xl:p-4">
-            <div v-for="(line, index) in lines" :key="index" class="shape-list-item">
-                <v-tooltip>
-                    <template v-slot:activator="{ props }">
-                        <div v-bind="props" class="shape-btn" @click="selectShape(line)">
-                            <ShapeIcon :size="line.size" :icon="line.icon" />
-                        </div>
-                    </template>
-                    <span>{{ line.name }}</span>
                 </v-tooltip>
             </div>
         </div>
@@ -35,7 +21,7 @@
                 <v-tooltip>
                     <template v-slot:activator="{ props }">
                         <div v-bind="props" class="shape-btn" @click="selectShape(typo)">
-                            <ShapeIcon :size="typo.size" :icon="typo.icon" />
+                            <div>T</div> <!-- Placeholder for text icon -->
                         </div>
                     </template>
                     <span>{{ typo.name }}</span>
@@ -47,7 +33,13 @@
 
 <script setup>
 import { defineProps, defineEmits } from 'vue';
-import ShapeIcon from './ShapeIcon.vue';
+import Circle from './shapes/Circle.vue';
+import Rectangle from './shapes/Rectangle.vue';
+import Parallelogram from './shapes/Parallelogram.vue';
+import RoundedRectangle from './shapes/RoundedRectangle.vue';
+import Rhombus from './shapes/Rhombus.vue';
+import Triangle from './shapes/Triangle.vue';
+import Process from './shapes/Process.vue';
 
 const props = defineProps({
     isOpen: Boolean
@@ -56,40 +48,19 @@ const props = defineProps({
 const emit = defineEmits(['shapeSelected']);
 
 const shapes = [
-    { name: 'Rectangle', icon: 'mdiRectangleOutline', size: 30 },
-    { name: 'Square', icon: 'mdiSquareOutline', size: 30 },
-    { name: 'Rounded Square', icon: 'mdiSquareRoundedOutline', size: 30 },
-    { name: 'Circle', icon: 'mdiCircleOutline', size: 30 },
-    { name: 'Triangle', icon: 'mdiTriangleOutline', size: 30 },
-    { name: 'Rhombus', icon: 'mdiRhombusOutline', size: 30 },
-    { name: 'Cube', icon: 'mdiCubeOutline', size: 30 },
-    { name: 'Hexagon', icon: 'mdiHexagonOutline', size: 30 },
-    { name: 'Octagon', icon: 'mdiOctagonOutline', size: 30 },
-    { name: 'Pentagon', icon: 'mdiPentagonOutline', size: 30 },
+    { name: 'Rectangle', component: Rectangle, size: 30 },
+    { name: 'Rounded Rectangle', component: RoundedRectangle, size: 30 },
+    { name: 'Circle', component: Circle, size: 30 },
+    { name: 'Parallelogram', component: Parallelogram, size: 30 },
+    { name: 'Process', component: Process, size: 30 },
+    { name: 'Rhombus', component: Rhombus, size: 30 },
+    { name: 'Triangle', component: Triangle, size: 30 },
 ];
 
-const lines = [
-    { name: 'Line', icon: 'mdiMinus', size: 30 },
-    { name: 'Vector Line', icon: 'mdiVectorLine', size: 30 },
-    { name: 'Arrow Up', icon: 'mdiArrowUp', size: 30 },
-    { name: 'Arrow Right', icon: 'mdiArrowRight', size: 30 },
-    { name: 'Arrow Bottom', icon: 'mdiArrowDown', size: 30 },
-    { name: 'Arrow Left', icon: 'mdiArrowLeft', size: 30 },
-    { name: 'Arrow Call', icon: 'mdiCallMade', size: 30 },
-    { name: 'Arrow Receive', icon: 'mdiCallReceived', size: 30 },
-    { name: 'Two Directional Arrow', icon: 'mdiArrowLeftRightBoldOutline', size: 30 },
-    { name: 'Arrow Up Down', icon: 'mdiArrowUpDown', size: 30 },
-    { name: 'Arrow Left Curve', icon: 'mdiSubdirectoryArrowLeft', size: 30 },
-    { name: 'Arrow Right Curve', icon: 'mdiSubdirectoryArrowRight', size: 30 },
-    { name: 'Axis X Arrow', icon: 'mdiAxisXArrow', size: 30 },
-    { name: 'Axis Y Arrow', icon: 'mdiAxisYArrow', size: 30 },
-    { name: 'Axis Z Arrow', icon: 'mdiAxisZArrow', size: 30 },
-];
-  
 const typography = [
     { name: 'Text', icon: 'mdiTextRecognition', size: 30 },
 ];
-  
+
 const selectShape = (item) => {
     emit('shapeSelected', item);
 };
@@ -105,5 +76,7 @@ const selectShape = (item) => {
     .shape-list-item:hover {
         @apply bg-theme-transparentBg cursor-pointer;
     }
+    .shape-btn {
+        @apply w-full h-full flex items-center justify-center;
+    }
 </style>
-  
