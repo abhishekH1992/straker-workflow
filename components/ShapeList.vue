@@ -14,20 +14,6 @@
                 </v-tooltip>
             </div>
         </div>
-        <div class="text-gray-500 p-4 pb-2 text-sm">Line</div>
-        <v-divider :thickness="2"></v-divider>
-        <div class="grid grid-cols-6 xl:grid-cols-4 gap-2 xl:gap-4 px-4 py-2 xl:p-4">
-            <div v-for="(line, index) in lines" :key="index" class="shape-list-item">
-                <v-tooltip>
-                    <template v-slot:activator="{ props }">
-                        <div v-bind="props" class="shape-btn" @click="selectShape(line)">
-                            <ShapeIcon :size="line.size" :icon="line.icon" />
-                        </div>
-                    </template>
-                    <span>{{ line.name }}</span>
-                </v-tooltip>
-            </div>
-        </div>
         <div class="text-gray-500 p-4 pb-2 text-sm">Typography</div>
         <v-divider :thickness="2"></v-divider>
         <div class="grid grid-cols-6 xl:grid-cols-4 gap-2 xl:gap-4 px-4 py-2 xl:p-4">
@@ -66,24 +52,6 @@ const shapes = [
     { name: 'Hexagon', icon: 'mdiHexagonOutline', size: 30 },
     { name: 'Octagon', icon: 'mdiOctagonOutline', size: 30 },
     { name: 'Pentagon', icon: 'mdiPentagonOutline', size: 30 },
-];
-
-const lines = [
-    { name: 'Line', icon: 'mdiMinus', size: 30 },
-    { name: 'Vector Line', icon: 'mdiVectorLine', size: 30 },
-    { name: 'Arrow Up', icon: 'mdiArrowUp', size: 30 },
-    { name: 'Arrow Right', icon: 'mdiArrowRight', size: 30 },
-    { name: 'Arrow Bottom', icon: 'mdiArrowDown', size: 30 },
-    { name: 'Arrow Left', icon: 'mdiArrowLeft', size: 30 },
-    { name: 'Arrow Call', icon: 'mdiCallMade', size: 30 },
-    { name: 'Arrow Receive', icon: 'mdiCallReceived', size: 30 },
-    { name: 'Two Directional Arrow', icon: 'mdiArrowLeftRightBoldOutline', size: 30 },
-    { name: 'Arrow Up Down', icon: 'mdiArrowUpDown', size: 30 },
-    { name: 'Arrow Left Curve', icon: 'mdiSubdirectoryArrowLeft', size: 30 },
-    { name: 'Arrow Right Curve', icon: 'mdiSubdirectoryArrowRight', size: 30 },
-    { name: 'Axis X Arrow', icon: 'mdiAxisXArrow', size: 30 },
-    { name: 'Axis Y Arrow', icon: 'mdiAxisYArrow', size: 30 },
-    { name: 'Axis Z Arrow', icon: 'mdiAxisZArrow', size: 30 },
 ];
   
 const typography = [
