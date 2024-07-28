@@ -15,7 +15,7 @@
                     :x2="getConnectionPoint(connection.toId).x"
                     :y2="getConnectionPoint(connection.toId).y"
                     stroke="black"
-                    stroke-width="10"
+                    stroke-width="5"
                 />
                 <line
                     v-if="tempConnection"
@@ -23,8 +23,8 @@
                     :y1="tempConnection.y1"
                     :x2="tempConnection.x2"
                     :y2="tempConnection.y2"
-                    stroke="red"
-                    stroke-width="10"
+                    stroke="black"
+                    stroke-width="5"
                 />
             </svg>
             <div

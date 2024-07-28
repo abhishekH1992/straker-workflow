@@ -1,6 +1,6 @@
 <template>
     <div class="shape-icon" :style="iconStyle">
-        <MdiIcon :icon="icon" preserveAspectRatio="xMidYMax meet" strokeWidth="1"/>
+        <MdiIcon :icon="icon" preserveAspectRatio="xMidYMax meet"/>
     </div>
 </template>
 
