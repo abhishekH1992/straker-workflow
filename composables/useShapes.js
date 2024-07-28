@@ -1,79 +1,53 @@
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 
 export function useShapes() {
     const shapes = ref([]);
     const connections = ref([]);
     const tempConnection = ref(null);
 
-    const addShape = (shape) => {
-        if(shape.icon !== 'mdiTextRecognition') {
-            shapes.value.push({
-                id: Date.now(),
-                ...shape,
-                showSettings: false,
-                isEditing: false,
-                text: '',
-                top: 100,
-                left: 100,
-                width: 150,
-                height: 150,
-                size: 150,
-            });
-        } else {
-            shapes.value.push({
-                id: Date.now(),
-                ...shape,
-                showSettings: false,
-                isEditing: false,
-                text: 'Write here...',
-                top: 100,
-                left: 100,
-            });
-        }
+    const addShape = (shapeInfo) => {
+        const newShape = {
+            id: Date.now(),
+            top: 100,
+            left: 100,
+            width: 100,
+            height: 100,
+            component: shapeInfo.name,
+            name: shapeInfo.name,
+            icon: shapeInfo.icon,
+            showSettings: false,
+            isEditing: false,
+            text: ''
+        };
+        shapes.value.push(newShape);
     };
 
-    const updateShape = (index, newAttributes) => {
-        if (shapes.value[index]) {
-            Object.assign(shapes.value[index], newAttributes);
-        }
+    const updateShape = (index, updatedProps) => {
+        shapes.value[index] = { ...shapes.value[index], ...updatedProps };
     };
 
     const deleteShape = (index) => {
-        if (shapes.value[index]) {
-            const shapeId = shapes.value[index].id;
-            shapes.value.splice(index, 1);
-            connections.value = connections.value.filter(conn => conn.fromId !== shapeId && conn.toId !== shapeId);
-        }
+        shapes.value.splice(index, 1);
     };
 
-    const toggleSettings = (index) => {
-        shapes.value.forEach((shape, i) => {
-            shape.showSettings = i === index ? !shape.showSettings : false;
-        });
-    };
-
-    const startConnection = (x, y, shapeId) => {
-        tempConnection.value = { x1: x, y1: y, x2: x, y2: y, fromId: shapeId };
+    const startConnection = (x, y, fromId) => {
+        tempConnection.value = { x1: x, y1: y, x2: x, y2: y, fromId };
     };
 
     const updateTempConnection = (x, y) => {
         if (tempConnection.value) {
-            tempConnection.value.x2 = x;
-            tempConnection.value.y2 = y;
+            tempConnection.value = { ...tempConnection.value, x2: x, y2: y };
         }
     };
 
-    const finishConnection = (toShapeId) => {
-        if (tempConnection.value && tempConnection.value.fromId !== toShapeId) {
+    const finishConnection = (toId) => {
+        if (tempConnection.value && tempConnection.value.fromId !== toId) {
             connections.value.push({
-                id: Date.now(),
                 fromId: tempConnection.value.fromId,
-                toId: toShapeId
+                toId: toId
             });
-            tempConnection.value = null;
-        } else {
-            tempConnection.value = null;
         }
+        tempConnection.value = null;
     };
 
     const saveToLocalStorage = () => {
@@ -88,11 +62,46 @@ export function useShapes() {
             const savedShapes = localStorage.getItem('shapes');
             const savedConnections = localStorage.getItem('connections');
             if (savedShapes) {
-                shapes.value = JSON.parse(savedShapes);
+                const parsedShapes = JSON.parse(savedShapes);
+                console.log('Loaded shapes:', parsedShapes);
+                const shapesWithComponents = parsedShapes.map(shape => {
+                    console.log('Processing shape:', shape);
+                    if (!shape.component) {
+                        shape.component = getComponentForShape(shape);
+                    }
+                    return shape;
+                });
+
+                shapes.value = shapesWithComponents;
+                console.log('Shapes after processing:', shapes.value);
             }
             if (savedConnections) {
                 connections.value = JSON.parse(savedConnections);
             }
+        }
+    };
+    const getComponentForShape = (shape) => {
+        console.log('Getting component for shape:', shape);
+        if (shape.component) {
+            return shape.component;
+        }
+        switch(shape.name) {
+            case 'Rectangle':
+                return 'Rectangle';
+            case 'Circle':
+                return 'Circle';
+            case 'Triangle':
+                return 'Triangle';
+            case 'Rhombus':
+                return 'Rhombus';
+            case 'Parallelogram':
+                return 'Parallelogram';
+            case 'Process':
+                return 'Process';
+            case 'Rounded Rectangle':
+                return 'RoundedRectangle';
+            default:
+                return 'Rectangle';
         }
     };
 
@@ -103,7 +112,6 @@ export function useShapes() {
         addShape,
         updateShape,
         deleteShape,
-        toggleSettings,
         startConnection,
         updateTempConnection,
         finishConnection,
